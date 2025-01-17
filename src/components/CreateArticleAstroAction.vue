@@ -1,5 +1,6 @@
 <script setup lang="ts">
- import { ref } from 'vue';
+ import { actions } from 'astro:actions';
+import { ref } from 'vue';
 
  const form_data = ref({
      slug: '',
@@ -11,26 +12,13 @@
  const res_message = ref<string|null>(null);
 
  const handleSubmit = async () => {
-     try {
-	 const response = await fetch("https://httpstat.us/200", {
-	     method: "POST",
-	     headers: {
-		 "Content-Type": "application/json",
-	     },
-	     body: JSON.stringify(form_data.value),
-	 });
-
-	 if (!response.ok) {
-	     throw new Error("Error en la petición");
-	 }
-
-	 const data = await response.json();
-	 res_message.value = "¡Formulario enviado con éxito!";
-	 console.log(data);
-     } catch (error) {
+     const { error } = await actions.createArticle(form_data.value)
+     if (error) {
 	 res_message.value = "Hubo un error al enviar el formulario.";
 	 console.error(error);
+	 return
      }
+     res_message.value = "¡Formulario enviado con éxito!";
  };
 </script>
 

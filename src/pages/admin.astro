@@ -1,6 +1,6 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import CreateArticle from "../components/CreateArticle.vue";
+import CreateArticleAstroAction from "../components/CreateArticleAstroAction.vue";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
@@ -84,7 +84,8 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 		<Header/>
 		<main>
 			<section>
-					<CreateArticle client:load/>
+				Using Astro actions
+				<CreateArticleAstroAction client:load/>
 			</section>
 		</main>
 		<Footer />
