@@ -1,21 +1,27 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { db } from 'astro:db';
 import BlogPost from '../../layouts/BlogPost.astro';
-import { render } from 'astro:content';
+import { articles } from 'astro:db';
+import { eq } from 'astro:db';
 
-export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.id },
-		props: post,
-	}));
+const { slug } = Astro.params;
+
+if (!slug) {
+  return Astro.redirect("/404");
 }
-type Props = CollectionEntry<'blog'>;
 
-const post = Astro.props;
-const { Content } = await render(post);
+const [arti] = await db
+	.select()
+	.from(articles)
+	.where(eq(articles.slug, slug))
+	.limit(1)
+if (!arti) {
+  return Astro.redirect("/404");
+}
+
+export const prerender = false
 ---
 
-<BlogPost {...post.data}>
-	<Content />
+<BlogPost title={arti.title} description={arti.description} publishedAt={arti.publishedAt} updatedAt={arti.updatedAt}>
+	<p>{arti.content}</p>
 </BlogPost>
