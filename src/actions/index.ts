@@ -10,7 +10,7 @@ export const server = {
 			description: z.string(),
 			content: z.string(),
 		}),
-		async handler(input, context) {
+		async handler(input) {
 			const now = new Date()
 			await db.insert(articles).values({
 				...input,
