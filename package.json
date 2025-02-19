@@ -3,20 +3,24 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --remote",
     "build": "astro check && ASTRO_DATABASE_FILE=.astro/content.db astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/db": "^0.14.5",
     "@astrojs/node": "^9.0.1",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.2.1",
     "@astrojs/vue": "^5.0.5",
+    "@libsql/client": "^0.14.0",
     "astro": "^5.1.7",
+    "drizzle-orm": "^0.39.3",
     "typescript": "^5.7.3",
     "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.30.4"
   }
 }

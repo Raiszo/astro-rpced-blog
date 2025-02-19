@@ -2,8 +2,6 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-import db from '@astrojs/db';
-
 import vue from '@astrojs/vue';
 
 import node from '@astrojs/node';
@@ -12,7 +10,7 @@ import node from '@astrojs/node';
 export default defineConfig({
   site: 'https://example.com',
   output: 'static',
-  integrations: [sitemap(), db(), vue()],
+  integrations: [sitemap(), vue()],
 
   adapter: node({
     mode: 'standalone',
