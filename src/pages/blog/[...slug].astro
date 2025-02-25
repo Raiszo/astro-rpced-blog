@@ -1,8 +1,8 @@
 ---
-import { db } from 'astro:db';
+import { eq } from 'drizzle-orm';
+import db from '../../db';
+import { articles } from '../../db/schema';
 import BlogPost from '../../layouts/BlogPost.astro';
-import { articles } from 'astro:db';
-import { eq } from 'astro:db';
 
 const { slug } = Astro.params;
 

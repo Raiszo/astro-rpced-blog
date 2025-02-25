@@ -4,9 +4,9 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import FormattedDate from '../../components/FormattedDate.astro';
-import { db } from 'astro:db';
-import { articles } from 'astro:db';
-import { desc } from 'astro:db';
+import db from '../../db';
+import { articles } from '../../db/schema';
+import { desc } from 'drizzle-orm';
 
 const posts = await db.select({
 	id: articles.id,

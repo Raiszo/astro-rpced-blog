@@ -1,6 +1,15 @@
 <script setup lang="ts">
- import { actions } from 'astro:actions';
-import { ref } from 'vue';
+ import { createTRPCProxyClient, httpBatchLink } from '@trpc/client';
+ import { ref } from 'vue';
+ import type { AdminRouter } from '../procedures/admin';
+
+ const trpc = createTRPCProxyClient<AdminRouter>({
+     links: [
+	 httpBatchLink({
+	     url: 'http://localhost:4321/api/trpc/admin',
+	 }),
+     ],
+ });
 
  const form_data = ref({
      slug: '',
@@ -12,12 +21,8 @@ import { ref } from 'vue';
  const res_message = ref<string|null>(null);
 
  const handleSubmit = async () => {
-     const { error } = await actions.createArticle(form_data.value)
-     if (error) {
-	 res_message.value = "Hubo un error al enviar el formulario.";
-	 console.error(error);
-	 return
-     }
+     // no error handling :c
+     await trpc.createArticle.mutate(form_data.value)
      res_message.value = "¡Formulario enviado con éxito!";
  };
 </script>
