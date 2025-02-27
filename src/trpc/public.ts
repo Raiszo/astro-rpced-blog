@@ -1,6 +1,6 @@
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import type { APIRoute } from "astro";
-import { createAstroContext, createLambdaContext, public_router } from "../../../../procedures/public";
+import { createAstroContext, createLambdaContext, public_router } from "../procedures/public";
 import { awsLambdaRequestHandler } from "@trpc/server/adapters/aws-lambda";
 
 export const prerender = false

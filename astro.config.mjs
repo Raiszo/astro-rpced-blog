@@ -1,10 +1,10 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import path from 'node:path'
 
 import vue from '@astrojs/vue';
-
-import node from '@astrojs/node';
+import amplifyAdapter from "./amplify-adapter";
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,7 +12,8 @@ export default defineConfig({
   output: 'static',
   integrations: [sitemap(), vue()],
 
-  adapter: node({
-    mode: 'standalone',
-  }),
+	adapter: amplifyAdapter({
+		publicRouterFile: path.join(import.meta.dirname, 'src/trpc/public.ts'),
+		privateRouterFile: path.join(import.meta.dirname, 'src/trpc/private.ts'),
+	}),
 });
