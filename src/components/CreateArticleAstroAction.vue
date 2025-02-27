@@ -1,12 +1,12 @@
 <script setup lang="ts">
  import { createTRPCProxyClient, httpBatchLink } from '@trpc/client';
  import { ref } from 'vue';
- import type { AdminRouter } from '../procedures/admin';
+ import type { PrivateRouter } from '../procedures/private';
 
- const trpc = createTRPCProxyClient<AdminRouter>({
+ const trpc = createTRPCProxyClient<PrivateRouter>({
      links: [
 	 httpBatchLink({
-	     url: 'http://localhost:4321/api/trpc/admin',
+	     url: 'http://localhost:4321/api/trpc/private',
 	 }),
      ],
  });

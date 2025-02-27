@@ -2,8 +2,6 @@ import { initTRPC } from "@trpc/server";
 import db from "../db";
 import { articles } from "../db/schema";
 import type { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch";
-import type { CreateAWSLambdaContextOptions } from "@trpc/server/adapters/aws-lambda";
-import type { APIGatewayProxyEventV2 } from "aws-lambda";
 
 const t = initTRPC.create()
 
@@ -26,7 +24,7 @@ export function createAstroContext(opts: FetchCreateContextFnOptions) {
   return opts
 }
 
-export function createLambdaContext(opts: CreateAWSLambdaContextOptions<APIGatewayProxyEventV2>) {
+export function createLambdaContext() {
 	return {}
 }
 
