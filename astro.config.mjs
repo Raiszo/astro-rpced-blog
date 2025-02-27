@@ -16,4 +16,10 @@ export default defineConfig({
 		publicRouterFile: path.join(import.meta.dirname, 'src/trpc/public.ts'),
 		privateRouterFile: path.join(import.meta.dirname, 'src/trpc/private.ts'),
 	}),
+	vite: {
+		ssr: {
+			// this way server build will contain its dependencies
+			noExternal:  true,
+		},
+	},
 });
